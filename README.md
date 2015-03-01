@@ -6,7 +6,6 @@ Based on ideas from [component](https://github.com/stuartsierra/component). Diff
 
 1. No need to explicitly define dependencies for a particular service.  Simply order the services in the system map to facilitate dependency needs.
 2. Configuration is first-class. To start the system or a particular service, a config value must be passed.  This allows you to start/stop a system using a development or production config in a functional way.
-3. Easy initialization of services using init1, int2, …
 
 ## Installation
 
@@ -43,9 +42,9 @@ Example scenario:
     (->HTTP (http/stop server))))
 
 (defsystem system
-  :ldap (init1 LDAP)
-  :mysql (init1 MySQL)
-  :http (init1 HTTP))
+  :ldap (->LDAP nil)
+  :mysql (->MySQL nil)
+  :http (->HTTP nil))
   
 (def config
   {:ldap {:host "localhost" :port 389}

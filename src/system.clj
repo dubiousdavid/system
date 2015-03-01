@@ -35,23 +35,3 @@
   [n & args]
   (let [kv-pairs (->> args (partition 2) (map vec) vec)]
     `(def ~n (SystemMap. ~kv-pairs))))
-
-(defmacro init1
-  "Initialize one arg record."
-  [cls]
-  `(new ~cls nil))
-
-(defmacro init2
-  "Initialize two arg record."
-  [cls]
-  `(new ~cls nil nil))
-
-(defmacro init3
-  "Initialize three arg record."
-  [cls]
-  `(new ~cls nil nil nil))
-
-(defmacro init4
-  "Initialize four arg record."
-  [cls]
-  `(new ~cls nil nil nil nil))

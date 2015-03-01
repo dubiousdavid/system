@@ -50,9 +50,9 @@
    :http {:port 80}})
 
 (defsystem system
-  :ldap (init1 LDAP)
-  :mysql (init1 MySQL)
-  :http (init1 HTTP))
+  :ldap (->LDAP nil)
+  :mysql (->MySQL nil)
+  :http (->HTTP nil))
 
 (ex system)
 (ex "start" (start system config))
