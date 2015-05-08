@@ -51,7 +51,7 @@ Example scenario:
    :mysql {:host "localhost" :port 3306}
    :http {:port 80}})
 
-;; Start our system  
+;; Start the system  
 (def started (start system config))
 ;; Transform the system into a hash map
 (->map started)
