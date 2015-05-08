@@ -7,7 +7,7 @@
   (start [this config] [this config deps]
     "Start a service with the given config and deps.")
   (stop [this] [this config]
-    "Stop a service with the given config."))
+    "Stop a service, optionally passing a config."))
 
 (declare ->SystemMap)
 
@@ -40,9 +40,6 @@
   (empty [this] (SystemMap. []))
   (equiv [this that] (= kv-pairs (.kv-pairs that)))
   (cons [this x] (SystemMap. (conj kv-pairs x))))
-
-;; (defmethod print-method SystemMap [system-map ^java.io.Writer w]
-;;   (.write w (.toString (.kv-pairs system-map))))
 
 (defn ->SystemMap [x]
   (SystemMap. x))
