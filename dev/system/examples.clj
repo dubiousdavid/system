@@ -55,5 +55,5 @@
   :http (->HTTP nil))
 
 (ex system)
-(ex "start" (start system config))
+(ex "start" (->map (start system config)))
 (ex "stop" (-> system (start config) stop))

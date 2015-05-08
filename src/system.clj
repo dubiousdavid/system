@@ -35,3 +35,8 @@
   [n & args]
   (let [kv-pairs (->> args (partition 2) (map vec) vec)]
     `(def ~n (SystemMap. ~kv-pairs))))
+
+(defn ->map
+  "Convert a SystemMap record into a hash map."
+  [x]
+  (into {} (:kv-pairs x)))
