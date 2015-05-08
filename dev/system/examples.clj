@@ -1,5 +1,5 @@
 (ns system.examples
-  (:use system rk.example))
+  (:use system system.util rk.example))
 
 (defn ldap-connect [config]
   config)
@@ -54,6 +54,8 @@
   :mysql (->MySQL nil)
   :http (->HTTP nil))
 
-(ex system)
+(ex "defsystem" (pairs system))
 (ex "start" (->map (start system config)))
-(ex "stop" (-> system (start config) stop))
+(ex "stop" (-> system (start config) stop pairs))
+(ex "try-start" (try-start :divide (/ 1 0)))
+(ex "try-stop" (try-stop :divide (/ 1 0)))

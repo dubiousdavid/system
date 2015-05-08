@@ -1,5 +1,4 @@
-(ns system.util
-  (:use rk.example))
+(ns system.util)
 
 (defn try-action [action k form]
   `(try ~form
@@ -9,9 +8,5 @@
 (defmacro try-start [k form]
   (try-action "start" k form))
 
-(ex (try-start :divide (/ 1 0)))
-
 (defmacro try-stop [k form]
   (try-action "stop" k form))
-
-(ex (try-stop :divide (/ 1 0)))

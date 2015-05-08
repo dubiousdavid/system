@@ -1,6 +1,7 @@
 (ns system
   "Start and stop services in a particular order."
-  (:use [system.util :only [try-start try-stop]]))
+  (:use [system.util :only [try-start try-stop]])
+  (:import [clojure.lang Seqable IPersistentCollection]))
 
 (defprotocol Service
   (start [this config] [this config deps]
@@ -8,7 +9,9 @@
   (stop [this] [this config]
     "Stop a service with the given config."))
 
-(defrecord SystemMap [kv-pairs]
+(declare ->SystemMap)
+
+(deftype SystemMap [kv-pairs]
   Service
   (start [this config]
     (->> kv-pairs
@@ -28,7 +31,21 @@
                  [])
          reverse
          vec
-         ->SystemMap)))
+         ->SystemMap))
+
+  Seqable
+  (seq [this] (seq kv-pairs))
+
+  IPersistentCollection
+  (empty [this] (SystemMap. []))
+  (equiv [this that] (= kv-pairs (.kv-pairs that)))
+  (cons [this x] (SystemMap. (conj kv-pairs x))))
+
+;; (defmethod print-method SystemMap [system-map ^java.io.Writer w]
+;;   (.write w (.toString (.kv-pairs system-map))))
+
+(defn ->SystemMap [x]
+  (SystemMap. x))
 
 (defmacro defsystem
   "Define a system. Takes a sequence of key/value pairs."
@@ -37,6 +54,11 @@
     `(def ~n (SystemMap. ~kv-pairs))))
 
 (defn ->map
-  "Convert a SystemMap record into a hash map."
+  "Convert a SystemMap into a hash map."
   [x]
-  (into {} (:kv-pairs x)))
+  (into {} (.kv-pairs x)))
+
+(defn pairs
+  "Convert a SystemMap into a vector of vector pairs."
+  [x]
+  (.kv-pairs x))

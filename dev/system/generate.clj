@@ -3,7 +3,7 @@
   (:require system.examples))
 
 (defn- tests [f]
-  (f 'system.examples :use '[system])
+  (f 'system.examples :use '[system system.util])
   (f 'system.util))
 
 (defn preview-tests []
