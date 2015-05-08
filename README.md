@@ -50,7 +50,11 @@ Example scenario:
   {:ldap {:host "localhost" :port 389}
    :mysql {:host "localhost" :port 3306}
    :http {:port 80}})
-  
+
+;; Start our system  
 (def started (start system config))
+;; Transform the system into a hash map
+(->map started)
+;; Stop the system
 (stop started)
 ```
