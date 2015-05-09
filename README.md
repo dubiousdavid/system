@@ -6,6 +6,7 @@ Based on ideas from [component](https://github.com/stuartsierra/component). Diff
 
 1. No need to explicitly define dependencies for a particular service.  Simply order the services in the system map to facilitate dependency needs.
 2. Configuration is first-class. To start the system or a particular service, a config value must be passed.  This allows you to start/stop a system using a development or production config in a functional way.
+3. Systems can be combined and added to after inital creation.
 
 ## Installation
 
