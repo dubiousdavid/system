@@ -1,6 +1,6 @@
 (ns system
   "Start and stop services in a particular order."
-  (:use [system.util :only [try-start try-stop]])
+  (:use [system.util :only [try-start try-stop unique-keys? pairs? throwe]])
   (:import [clojure.lang Seqable IPersistentCollection]))
 
 (defprotocol Service
@@ -41,14 +41,18 @@
   (equiv [this that] (= kv-pairs (.kv-pairs that)))
   (cons [this x] (SystemMap. (conj kv-pairs x))))
 
-(defn ->SystemMap [x]
-  (SystemMap. x))
+(defn ->SystemMap
+  "Create a new system map."
+  [kv-pairs]
+  (throwe (pairs? kv-pairs) "Uneven number of key/value pairs.")
+  (throwe (unique-keys? kv-pairs) "Keys must be unique.")
+  (SystemMap. kv-pairs))
 
 (defmacro defsystem
   "Define a system. Takes a sequence of key/value pairs."
   [n & args]
-  (let [kv-pairs (->> args (partition 2) (map vec) vec)]
-    `(def ~n (SystemMap. ~kv-pairs))))
+  (let [kv-pairs (->> args (partition-all 2) (map vec) vec)]
+    `(def ~n (->SystemMap ~kv-pairs))))
 
 (defn ->map
   "Convert a SystemMap into a hash map."

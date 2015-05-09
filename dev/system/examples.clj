@@ -1,5 +1,5 @@
 (ns system.examples
-  (:use system system.util rk.example))
+  (:use system system.util))
 
 (defn ldap-connect [config]
   config)
@@ -54,8 +54,21 @@
   :mysql (->MySQL nil)
   :http (->HTTP nil))
 
-(ex "defsystem" (pairs system))
-(ex "start" (->map (start system config)))
-(ex "stop" (-> system (start config) stop pairs))
-(ex "try-start" (try-start :divide (/ 1 0)))
-(ex "try-stop" (try-stop :divide (/ 1 0)))
+(comment
+  (defn- tests [f]
+    (f 'system.examples :use '[system system.util]))
+
+  (defn preview-tests []
+    (tests gen-facts))
+
+  (defn gen-tests []
+    (tests gen-facts-file))
+
+  (ex "defsystem" (pairs system))
+  (ex "->SystemMap"
+      (->SystemMap [[:a 1] [:a 2]])
+      (->SystemMap [[:a 1] [:b]]))
+  (ex "start" (->map (start system config)))
+  (ex "stop" (-> system (start config) stop pairs))
+  (ex "try-start" (try-start :divide (/ 1 0)))
+  (ex "try-stop" (try-stop :divide (/ 1 0))))

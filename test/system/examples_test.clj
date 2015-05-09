@@ -6,6 +6,11 @@
     [[:ldap (map->LDAP {:conn nil})]
      [:mysql (map->MySQL {:conn nil})]
      [:http (map->HTTP {:server nil})]]))
+(facts "->SystemMap"
+  (fact (->SystemMap [[:a 1] [:a 2]]) =>
+    (throws java.lang.Exception "Keys must be unique."))
+  (fact (->SystemMap [[:a 1] [:b]]) =>
+    (throws java.lang.Exception "Uneven number of key/value pairs.")))
 (facts "start"
   (fact (->map (start system config)) =>
     {:ldap (map->LDAP {:conn {:port 389, :host "localhost"}}),

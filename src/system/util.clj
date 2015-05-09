@@ -10,3 +10,14 @@
 
 (defmacro try-stop [k form]
   (try-action "stop" k form))
+
+(defn unique-keys? [kv-pairs]
+  (= (-> (map first kv-pairs) set count)
+     (count kv-pairs)))
+
+(defn pairs? [kv-pairs]
+  (every? even? (map count kv-pairs)))
+
+(defn throwe [pred msg]
+  (when-not pred
+    (throw (Exception. msg))))
