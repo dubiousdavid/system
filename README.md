@@ -58,3 +58,20 @@ Example scenario:
 ;; Stop the system
 (stop started)
 ```
+
+You can also use `conj` and `concat` with a system to add another service or combine multiple systems.
+
+```clojure
+(defsystem sys1
+  :ldap (->LDAP nil))
+
+(defsystem sys2
+  :mysql (->MySQL nil))
+
+;; Concatenate sys1 and sys2  
+(def sys3 (->SystemMap (concat sys1 sys2)))
+;; Append the http service to sys1
+(def sys4 (conj sys1 [:http (->HTTP nil)])
+;; View the services in the order that they will be started
+(pairs sys4)
+```
