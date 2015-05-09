@@ -14,6 +14,10 @@ Based on ideas from [component](https://github.com/stuartsierra/component). Diff
 [system "0.1.0"]
 ```
 
+## API Documentation
+
+http://dubiousdavid.github.io/system/
+
 ## How to use
 
 Example scenario:
