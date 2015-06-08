@@ -11,7 +11,7 @@ Based on ideas from [component](https://github.com/stuartsierra/component). Diff
 ## Installation
 
 ```clojure
-[system "0.1.0"]
+[com.2tothe8th/system "0.1.0"]
 ```
 
 ## API Documentation
@@ -37,7 +37,7 @@ Example scenario:
     (->MySQL (mysql/connect (:mysql config))))
   (stop [this config]
     (->MySQL (mysql/close conn))))
-    
+
 (defrecord HTTP [server]
   Service
   (start [this config deps]
@@ -50,13 +50,13 @@ Example scenario:
   :ldap (->LDAP nil)
   :mysql (->MySQL nil)
   :http (->HTTP nil))
-  
+
 (def config
   {:ldap {:host "localhost" :port 389}
    :mysql {:host "localhost" :port 3306}
    :http {:port 80}})
 
-;; Start the system  
+;; Start the system
 (def started (start system config))
 ;; Transform the system into a hash map
 (->map started)
@@ -73,7 +73,7 @@ You can also use `conj` and `concat` with a system to add another service or com
 (defsystem sys2
   :mysql (->MySQL nil))
 
-;; Concatenate sys1 and sys2  
+;; Concatenate sys1 and sys2
 (def sys3 (->SystemMap (concat sys1 sys2)))
 ;; Append the http service to sys1
 (def sys4 (conj sys1 [:http (->HTTP nil)])
