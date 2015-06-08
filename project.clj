@@ -1,4 +1,4 @@
-(defproject com.2tothe8th/system "0.1.0"
+(defproject com.2tothe8th/system "0.2.0"
   :description "Start and stop services in a particular order."
   :url "https://github.com/dubiousdavid/system"
   :license {:name "Eclipse Public License"

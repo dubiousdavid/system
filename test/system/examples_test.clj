@@ -1,5 +1,5 @@
 (ns system.examples-test
-  (:use system system.util midje.sweet system.examples))
+  (:use system.core system.util midje.sweet system.examples))
 
 (facts "defsystem"
   (fact (pairs system) =>

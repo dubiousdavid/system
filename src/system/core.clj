@@ -1,4 +1,4 @@
-(ns system
+(ns system.core
   "Start and stop services in a particular order."
   (:use [system.util :only [try-start try-stop unique-keys? pairs? throwe]])
   (:import [clojure.lang Seqable IPersistentCollection]))

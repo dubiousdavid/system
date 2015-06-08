@@ -1,5 +1,5 @@
 (ns system.examples
-  (:use system system.util))
+  (:use system.core system.util))
 
 (defn ldap-connect [config]
   config)

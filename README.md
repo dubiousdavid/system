@@ -11,7 +11,7 @@ Based on ideas from [component](https://github.com/stuartsierra/component). Diff
 ## Installation
 
 ```clojure
-[com.2tothe8th/system "0.1.0"]
+[com.2tothe8th/system "0.2.0"]
 ```
 
 ## API Documentation
@@ -22,7 +22,7 @@ http://dubiousdavid.github.io/system/
 
 Example scenario:
 ```clojure
-(use 'system)
+(use 'system.core)
 
 (defrecord LDAP [conn]
   Service
